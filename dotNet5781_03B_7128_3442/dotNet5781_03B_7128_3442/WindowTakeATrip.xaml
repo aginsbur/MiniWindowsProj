@@ -1,0 +1,22 @@
+﻿<Window x:Name="main_window" x:Class="dotNet5781_03B_7128_3442.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotNet5781_03B_7128_3442"
+        mc:Ignorable="d"
+        Title="Window3" Height="250.704" Width="892.516" Closed="button_close_click">
+    <Grid x:Name="grid_main" Margin="0,0,-7,-19.667">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFFFFFC" Offset="0.997"/>
+                <GradientStop Color="#FFFFC600" Offset="1"/>
+                <GradientStop Color="#FFFBCD29" Offset="0.299"/>
+                <GradientStop Color="#FFFEF8DF" Offset="0.858"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock x:Name="text_Block_message" HorizontalAlignment="Left" Margin="20,45,0,0" TextWrapping="Wrap" Text="Enter Distance To Travel in Km and press &quot;Enter&quot; to continue" VerticalAlignment="Top" Height="67" Width="600" FontSize="20" FontFamily="Doppio One"/>
+        <TextBox x:Name="Text_Box_distance" MaxLength="4" HorizontalAlignment="Left" Height="41" Margin="625,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontFamily="Doppio One" FontSize="20" VerticalContentAlignment="Center" BorderBrush="#FF292925" KeyDown="Text_Box_distance_key_Down" TextChanged="Text_Box_distance_textChange" Background="{x:Null}"/>
+
+    </Grid>
+</Window>

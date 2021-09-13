@@ -1,0 +1,54 @@
+﻿<Window x:Class="UI.UserTrip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        Title="UserTrip" Height="630.4" Width="944">
+    <Window.Resources>
+        <DataTemplate x:Key="DataGridBusStopDisplay">
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Margin="0,0,-168.4,-180">
+        <Grid x:Name="windowBusLine" Margin="0,0,3.667,-4.667">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0.169"/>
+                    <GradientStop Color="#FF5ED3FF" Offset="0.846"/>
+                    <GradientStop Color="#FF76A7FF" Offset="0.949"/>
+                    <GradientStop Color="#FF12FFFF" Offset="0.525"/>
+                    <GradientStop Color="#FF5ED3FF" Offset="0.784"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Content="Choose starting Bustop:" HorizontalAlignment="Left" Margin="43,231,0,513.467" VerticalAlignment="Center" Height="41" Width="226" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+            <Label Content="Choose ending Bustop:" HorizontalAlignment="Left" Margin="292,232,0,508.467" VerticalAlignment="Center" Height="45" Width="194" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+            <Button x:Name="buttonSelect" Content="Select" Background="#FF95FFAE" BorderBrush="#FF4DDE74" BorderThickness="5" SnapsToDevicePixels="True" HorizontalAlignment="Left" Margin="686,468,0,0" VerticalAlignment="Top" Width="183" Height="44" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="buttonSelect_click"/>
+            <Button x:Name="buttonCancel" Content="Cancel" Background="#FFFFAEA8" BorderBrush="#FFEA5E54" BorderThickness="5" SnapsToDevicePixels="True" HorizontalAlignment="Left" Margin="448,532,0,0" VerticalAlignment="Top" Width="183" Height="44" FontWeight="Bold" FontFamily="Segoe Print" FontSize="18" Click="buttonCancel1_click" IsEnabled="False" Visibility="Visible"/>
+            <ListBox x:Name="lbBuslineSelection"  HorizontalAlignment="Left" Height="340" Margin="540,97,0,0" VerticalAlignment="Top" Width="354"  ItemsSource="{Binding}" SelectionMode="Single" OpacityMask="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Visibility="Visible" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:Name="ListBoxItemBusLines">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ShowGridLines="False" Grid.IsSharedSizeScope="True" Background="{x:Null}" OpacityMask="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="ID" Text="{Binding ID}" Grid.Row="0" Grid.Column="0" FontFamily="Segoe Print" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="LineNumber" Text="{Binding LineNumber}" Grid.Row="0" Grid.Column="1" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" />
+                            <TextBlock x:Name="Region" Text="{Binding Region}" Grid.Row="0" Grid.Column="2" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button x:Name="buttonTravel" Background="#FFFFAEA8" BorderBrush="#FFEA5E54" BorderThickness="5" SnapsToDevicePixels="True" Content="Travel" HorizontalAlignment="Left" Margin="686,532,0,0" VerticalAlignment="Top" Width="183" Height="44" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="buttonTravel_click" IsEnabled="False"/>
+            <ComboBox x:Name="bustopbeg"  HorizontalAlignment="Left" Margin="74,277,0,0" VerticalAlignment="Top" Width="165" Height="40" />
+            <ComboBox x:Name="bustopend"   HorizontalAlignment="Left" Margin="307,277,0,0" VerticalAlignment="Top" Width="164" Height="40" />
+            <Label Content="   ID             Line number     region" HorizontalAlignment="Left" Margin="540,47,0,693.467" VerticalAlignment="Center" Height="45" Width="354" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+        </Grid>
+    </Grid>
+</Window>

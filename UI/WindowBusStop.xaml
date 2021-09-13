@@ -1,0 +1,70 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Name="BusStop" x:Class="UI.WindowBusStop"
+        mc:Ignorable="d"
+        Title="WindowBusStop" Height="503.5" Width="876" Loaded="Window_Loaded" WindowState="Maximized">
+    <Window.Resources>
+        <CollectionViewSource x:Key="busStopViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BusStop}}"/>
+        <DataTemplate x:Key="busLineDisplay">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="55"/>
+                    <ColumnDefinition  Width="55"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lineNumber" Text="{Binding LineNumber}" HorizontalAlignment="Left" Grid.Column="0" FontSize="12" />
+                <TextBlock x:Name="lineRegion" Text="{Binding Region}" HorizontalAlignment="Left" Grid.Column="1" FontSize="12"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource busStopViewSource}" Margin="0,0,-6.667,-5">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.169"/>
+                <GradientStop Color="#FF5ED3FF" Offset="0.846"/>
+                <GradientStop Color="#FF76A7FF" Offset="0.949"/>
+                <GradientStop Color="#FF12FFFF" Offset="0.525"/>
+                <GradientStop Color="#FF5ED3FF" Offset="0.784"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="691*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="gridBusStop" HorizontalAlignment="Left" Margin="289.833,35,0,0" VerticalAlignment="Top" Height="352" Width="350" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="136"/>
+                <ColumnDefinition Width="Auto" MinWidth="233.333"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" MinHeight="58"/>
+                <RowDefinition Height="Auto" MinHeight="124"/>
+            </Grid.RowDefinitions>
+            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8.667,0,8.667" Grid.Row="1" VerticalAlignment="Center" Width="144" FontFamily="Segoe Print" FontWeight="Bold" Height="32" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="addressTextBox" Grid.Column="1" Background="White" HorizontalAlignment="Left" Height="32" Margin="11,8.667,0,8.667" Grid.Row="1" Text="{Binding Address, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="195" FontFamily="Segoe Print" FontSize="14" HorizontalScrollBarVisibility="Auto"/>
+            <Label Content="Bus Lines Using &#xD;&#xA;Station:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,15.333,0,41.333" Grid.Row="4" VerticalAlignment="Center" Height="70" FontFamily="Segoe Print" FontWeight="Bold" Width="139" FontSize="16" Grid.ColumnSpan="2"/>
+            <ListBox x:Name="LBbusLinesUsingStation" Grid.Column="1" Background="White" HorizontalAlignment="Left" Height="117" ItemsSource="{Binding}" ItemTemplate="{StaticResource busLineDisplay}" Margin="11,16.333,0,-6" Grid.Row="4" VerticalAlignment="Center" Width="195" FontFamily="Segoe Print" FontSize="11"/>
+            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10,0,10" Grid.Row="3" VerticalAlignment="Center" Width="144" FontFamily="Segoe Print" FontWeight="Bold" Height="38" FontSize="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="latitudeTextBox" Background="White" Grid.Column="1" HorizontalAlignment="Left" Height="38" Margin="11,10,0,10" Grid.Row="3" Text="{Binding Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="195" FontFamily="Segoe Print" FontSize="14"/>
+            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10.333,0,3" Grid.Row="2" VerticalAlignment="Center" Width="144" FontFamily="Segoe Print" FontWeight="Bold" Height="36" FontSize="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="11,10.333,0,7" Grid.Row="2" Background="White" Text="{Binding Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="195" FontFamily="Segoe Print" FontSize="14"/>
+            <Label Content="Station Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,10.333" Grid.Row="0" VerticalAlignment="Center" Width="144" FontFamily="Segoe Print" FontWeight="Bold" Height="36" FontSize="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="stationCodeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="11,7,0,10.333" Grid.Row="0" Text="{Binding StationCode, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="195" FontFamily="Segoe Print" Background="White" FontSize="14"/>
+        </Grid>
+        <ComboBox x:Name="cbBusStops" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="158.833,36,0,0"
+                 ItemsSource="{Binding}" Height="42" SelectionChanged="cbBusStops_SelectionChanged" FontFamily="Segoe Print" FontSize="14" HorizontalContentAlignment="Center" Grid.Column="1" Background="{x:Null}" BorderBrush="White"/>
+        <Label x:Name="labelBusStopCode" Content="Bus Stop Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,36,0,0" Width="174" RenderTransformOrigin="0.559,0.192"  Height="52" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Segoe Print" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="529.833,405,0,0" VerticalAlignment="Top" Width="110" Height="41" Click="buttonCancel_Click" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Background="#FFFFAEA8" BorderBrush="#FFEA5E54" BorderThickness="5" SnapsToDevicePixels="True" Visibility="Collapsed" Grid.Column="1"/>
+        <Button x:Name="buttonOk" Content="OK" HorizontalAlignment="Left" Margin="392.833,405,0,0" VerticalAlignment="Top" Width="110" Click="buttonOk_click" Height="41" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Background="#FF95FFAE" BorderBrush="#FF4DDE74" BorderThickness="5" Visibility="Collapsed" Grid.Column="1"/>
+        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="34.833,220,0,0" VerticalAlignment="Top" Width="220" Click="buttonAdd_Click" Height="41" FontFamily="Segoe Print" FontWeight="Bold" FontSize="14" RenderTransformOrigin="-0.079,0.504" Background="#FF95FFAE" BorderBrush="#FF4DDE74" BorderThickness="5" SnapsToDevicePixels="True" Grid.Column="1"/>
+        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" Margin="34.833,283,0,0" VerticalAlignment="Top" Width="220" Click="buttonUpdate_click" Height="41" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Background="#FF95FFAE" BorderBrush="#FF4DDE74" BorderThickness="5" SnapsToDevicePixels="True" Grid.Column="1"/>
+        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="34.833,346,0,0" VerticalAlignment="Top" Width="220" Click="buttonDeleteClick" Height="41" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" IsEnabled="False" Background="#FFFFAEA8" BorderBrush="#FFEA5E54" BorderThickness="5" SnapsToDevicePixels="True" Grid.Column="1"/>
+    </Grid>
+</Window>

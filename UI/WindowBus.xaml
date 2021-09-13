@@ -1,0 +1,123 @@
+﻿<Window x:Class="UI.WindowBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        Title="WindowBus" Height="643.333" Width="1074" WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate x:Key="myListBoxDisplay">
+            <Border x:Name="border" BorderBrush="Gray" BorderThickness="5"
+          Padding="5" Margin="5" Background="White">
+                <Grid x:Name="GridListLayOut"  HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding LicenseNum}" HorizontalAlignment="Left" Grid.Column="0" FontSize="16"/>
+                    <TextBlock Text="{Binding StartDate}" HorizontalAlignment="Left" Grid.Column="1" FontSize="16"/>
+                    <TextBlock Text="{Binding Date}" HorizontalAlignment="Left" Grid.Column="2" FontSize="16"/>
+                    <TextBlock Text="{Binding TotalTravel}" HorizontalAlignment="Center" Grid.Column="3" FontSize="16"/>
+                    <TextBlock Text="{Binding Travel}" HorizontalAlignment="Center" Grid.Column="4" FontSize="16"/>
+                    <Button x:Name="button_travel" Content="Travel" Grid.Column="5" HorizontalAlignment="Center"  Background="#FFA4F5A1" FontFamily="Berlin Sans FB" FontWeight="Normal" FontSize="20" Click="button_travel_click" BorderBrush="#FF3DFF05">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Currstate}" Value="NEEDSERVICE">
+                                        <Setter Property= "IsEnabled" Value= "False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Currstate}" Value="NEEDREFUEL">
+                                        <Setter Property= "IsEnabled" Value= "False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Currstate}" Value="READY2GO">
+                                        <Setter Property= "IsEnabled" Value= "True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Currstate}" Value="READY2GO">
+                    <Setter Property="BorderBrush" Value="#FF22FF00" TargetName="border" />
+                    <Setter Property="Background" TargetName="border" Value="#FFAAF7BC" />
+                    <Setter Property="BorderThickness" Value="3" TargetName="border" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Currstate}" Value="NEEDREFUEL">
+                    <Setter Property="BorderBrush" Value="#FF8815A7" TargetName="border" />
+                    <Setter Property="Background" TargetName="border" Value="#FFF37CFC" />
+                    <Setter Property="BorderThickness" Value="3" TargetName="border" />
+                    <Setter Property="Padding" Value="5" TargetName="border" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Currstate}" Value="NEEDSERVICE">
+                    <Setter Property="BorderBrush" Value="#FFF74242" TargetName="border" />
+                    <Setter Property="Background" TargetName="border" Value="#FFFF9B9B" />
+                    <Setter Property="BorderThickness" Value="3" TargetName="border" />
+                    <Setter Property="Padding" Value="5" TargetName="border" />
+                </DataTrigger>
+                </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid x:Name="GridMain" Margin="0,0,-3.667,-3" RenderTransformOrigin="0.5,0.5" Height="617" VerticalAlignment="Top">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform Angle="-0.384"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.035"/>
+                <GradientStop Color="White" Offset="0.273"/>
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FF8FE8E5" Offset="0.57"/>
+                <GradientStop Color="#FF22B5DD" Offset="0.907"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions >
+        <Grid x:Name="GridTitle" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Margin="-10,0,0.333,370.667" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="LabelTitle1" HorizontalAlignment="Center" Grid.Column="0" FontSize="16" FontFamily="Berlin Sans FB" Content="License number:"  Width="127" Margin="17,0,0.667,-19">
+            </Label>
+            <Label x:Name="LabelTitle2" HorizontalAlignment="Center" Grid.Column="3"  FontSize="16" FontFamily="Berlin Sans FB" Content="Odometer:"  Width="145" Margin="17,0,7.333,-19">
+            </Label>
+            <Label x:Name="LabelTitle3" HorizontalAlignment="Center" Grid.Column="1"  FontSize="16" FontFamily="Berlin Sans FB" Content="Date of aquisition:"  Width="133" Margin="4.333,0,7.333,-19">
+            </Label>
+            <Label x:Name="LabelTitle4" HorizontalAlignment="Center" Grid.Column="3"  FontSize="16" FontFamily="Berlin Sans FB" Content="Km from last refuel:"  Width="162" Margin="167,0,9.667,-19" Grid.ColumnSpan="2">
+            </Label>
+            <Label x:Name="LabelTitle5" HorizontalAlignment="Center" Grid.Column="1"  FontSize="16" FontFamily="Berlin Sans FB" Content="Date of last maintenance:"  Width="181" Margin="168.333,0,157.333,-19" Grid.ColumnSpan="3">
+            </Label>
+        </Grid>
+        <Button x:Name="button_Add"  
+         Content="Add A Bus" Grid.Column="0" Grid.Row="1"
+         Background="LightGreen" Click="button_add_click"  FontFamily="Berlin Sans FB" FontSize="28" Margin="47,522.333,52.333,22.333" Grid.RowSpan="2" />
+        <ListBox x:Name="lbBuses" 
+         ItemsSource="{Binding}" HorizontalAlignment="stretch" Margin="0,33,0.333,0" VerticalAlignment="Top" 
+        Grid.Column="0" HorizontalContentAlignment="Stretch" 
+        ItemTemplate="{StaticResource myListBoxDisplay}" MouseDoubleClick="lbBuses_MouseDoubleClick"  Background="{x:Null}" OpacityMask="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="#FF23BB3A" Grid.RowSpan="2" Height="496"/>
+    </Grid>
+
+</Window>
